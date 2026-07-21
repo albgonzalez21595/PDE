@@ -1,1 +1,66 @@
+# Decision Log
 
+---
+
+## 2026-07-21 — From Super App to Personal Decision Engine
+
+### Context
+
+The project started with the idea of building a consumer Super App composed of multiple mini applications connected through a shared recommendation engine.
+
+After several discussions, it became clear that the mini apps themselves are not the long-term value of the company.
+
+### Decision
+
+PDE is no longer defined as a Super App.
+
+PDE is defined as a **Personal Decision Engine**.
+
+Mini apps are simply data collection and interaction mechanisms that contribute to building a richer understanding of each user.
+
+The long-term asset of the company is the continuously evolving user model.
+
+---
+
+## 2026-07-21 — The company exists to reduce the cost of decision making
+
+### Context
+
+Initially, the project focused on building better recommendation systems.
+
+However, analysing real user behaviour revealed that recommendations are not the main problem.
+
+Users spend significant amounts of time searching, comparing and evaluating options before making a decision.
+
+### Decision
+
+The primary problem PDE aims to solve is **the cost of evaluating choices**, not the lack of recommendations.
+
+Success should be measured by reducing the effort required to make decisions rather than by increasing the number of recommendations shown.
+
+---
+
+## 2026-07-21 — The core problem is behavioural, not technological
+
+### Context
+
+Instead of starting from technology (AI, Interest Graph, PostgreSQL...), we analysed how people actually make decisions.
+
+Patterns repeatedly appeared across different domains such as movies, restaurants, books and travel.
+
+### Decision
+
+Product discovery will focus on understanding user behaviour before making architectural decisions.
+
+Technology exists to support the product, not define it.
+
+---
+
+## 2026-07-21 — New company thesis
+
+Current working thesis:
+
+> The Internet solved access to information.
+> It did not solve decision making.
+
+This statement will act as one of the central hypotheses of the project until validated or disproved.
