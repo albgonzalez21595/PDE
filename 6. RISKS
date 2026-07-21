@@ -1,0 +1,165 @@
+# RISKS.md
+
+> This document should always answer: what could invalidate PDE, and how would we know early?
+
+Each risk includes: what it is, why it matters, how we would detect it, and what would reduce it. Risks are ordered by how likely they are to kill the project, not by how interesting they are to discuss.
+
+---
+
+## R1 — The sensor/product paradox
+
+**What it is**
+
+Mini apps are framed as sensors, not products. But a mini app with no standalone value gets no usage, and a mini app with no usage generates no signal. The framing risks hiding the fact that the first mini app still has to win as a product before it can function as a sensor.
+
+**Why it matters**
+
+This is the same cold-start problem the Super App version had, relabeled. If we design the first mini app assuming it only needs to be "good enough to collect signal," we will build something nobody opens twice.
+
+**How we would detect it**
+
+Weekly retention of the first mini app is at or below what any generic, non-personalized app in that category would get. Users open it once out of curiosity and don't return.
+
+**What would reduce it**
+
+Build and evaluate the first mini app exactly as if PDE and the Interest Graph did not exist — as a standalone product that has to win purely on its own value. Only instrument it for cross-domain signal once it has retention on its own merits.
+
+**Status:** Unresolved. This is the single most important open risk in the project.
+
+---
+
+## R2 — Scope expansion disguised as strategic clarity
+
+**What it is**
+
+The repository structure (VISION, INTEREST_GRAPH, TECHNICAL_ARCHITECTURE, DATABASE, AI, BUSINESS_MODEL, ROADMAP, USER_RESEARCH...) is the documentation footprint of a funded, staffed startup. We are two people with 15h/week each.
+
+**Why it matters**
+
+Writing strategy is lower-risk and more comfortable than talking to users, because it can't "fail" the way a real conversation can. It is easy to spend most of our available hours refining documents instead of testing the core hypothesis with real people.
+
+**How we would detect it**
+
+Time spent per week on documentation/architecture exceeds time spent per week talking to users or building the first testable thing. Weeks pass with new docs but no new user conversations or usage data.
+
+**What would reduce it**
+
+A simple time-allocation rule: no work on INTEREST_GRAPH.md, TECHNICAL_ARCHITECTURE.md, or AI.md until the user problem (cost of evaluating options) has been validated with real behavioral evidence, not just conversations.
+
+**Status:** Live risk. Worth checking honestly every 2-3 weeks: where did the hours actually go?
+
+---
+
+## R3 — Privacy and profiling exposure (GDPR)
+
+**What it is**
+
+The core asset — a unified behavioral model of a person across unrelated domains (what they watch, eat, buy, read) — is, under GDPR, profiling in one of its most sensitive forms. This is structurally different from a single-domain recommendation system.
+
+**Why it matters**
+
+Combining data across domains this different typically requires explicit, granular consent rather than legitimate interest. Article 22 GDPR gives users rights against decisions based solely on automated processing with significant effects — the more "decision-making" PDE presents itself as, the closer it sits to that threshold. Two people at 15h/week are not equipped to absorb a serious compliance failure.
+
+**How we would detect it**
+
+We can't wait to "detect" this reactively — it needs review before storing cross-domain personal data at any real scale, not after.
+
+**What would reduce it**
+
+Legal review (even a single paid consultation) before building any cross-domain data model. Design data collection to be domain-siloed and opt-in per domain from day one, rather than assuming a unified profile is the default.
+
+**Status:** Unresolved, not yet addressed anywhere in the repository.
+
+---
+
+## R4 — Trust vs. surveillance perception
+
+**What it is**
+
+INSIGHTS.txt correctly states trust matters more than accuracy. But a system that visibly understands a person across movies, food, travel, and purchases is more likely to feel like surveillance than like a trusted advisor, unless the value exchange and data transparency are unusually explicit.
+
+**Why it matters**
+
+The more powerful and accurate the cross-domain model becomes, the more likely it triggers a "this knows too much about me" reaction rather than a "this really gets me" reaction. This directly undermines the project's own central thesis if not designed for deliberately.
+
+**How we would detect it**
+
+User research (interviews, not just usage data) surfaces discomfort, hesitation to connect additional domains, or explicit "this is creepy" feedback when cross-domain use is introduced.
+
+**What would reduce it**
+
+Test the willingness to connect a second domain explicitly, as its own hypothesis, once the first mini app has retention. Do not assume it will be welcomed just because the first app was liked.
+
+**Status:** Untested. No evidence yet either way.
+
+---
+
+## R5 — Weak or absent cross-domain signal
+
+**What it is**
+
+The thesis assumes that understanding someone's taste in one domain (e.g., movies) meaningfully improves recommendations in an unrelated domain (e.g., restaurants). This is an assumption, not a validated fact — the correlation between taste clusters across very different domains may be much weaker than it intuitively seems.
+
+**Why it matters**
+
+If cross-domain signal turns out to be weak, the entire premise of PDE over a single excellent single-domain app collapses — the extra complexity of the Interest Graph would not translate into extra recommendation quality.
+
+**How we would detect it**
+
+Once there are two mini apps with real usage data, measure whether adding data from domain B measurably improves recommendation quality/acceptance in domain A, compared to a single-domain baseline. If the lift is small or absent, the core cross-domain thesis is falsified.
+
+**What would reduce it**
+
+This can only really be tested once two data-generating mini apps exist. Until then, treat cross-domain lift as an unproven hypothesis, not a given — do not architect for it prematurely (see R2).
+
+**Status:** Cannot be tested yet. Flagged so it isn't forgotten or assumed true by default.
+
+---
+
+## R6 — Structural competition from platforms that already have the data
+
+**What it is**
+
+Google, Amazon, and Meta already hold cross-domain behavioral data about their own users (search, maps, shopping, social) and have not unified it into a "personal decision engine." This is evidence the problem is structurally hard — internal business silos, regulatory exposure, and public trust risk — not evidence that the opportunity is simply unclaimed.
+
+**Why it matters**
+
+If we succeed at building real cross-domain signal and it becomes commercially interesting, it becomes interesting to platforms with orders of magnitude more data and distribution than us. We should not assume "nobody has done this yet" implies "nobody could do this quickly if it worked."
+
+**How we would detect it**
+
+Ongoing competitive monitoring once any traction appears — not a one-time check now.
+
+**What would reduce it**
+
+Depth in a narrow, defensible niche (data or trust that big platforms have no incentive to replicate cheaply) rather than breadth across many domains, at least until there is real traction to defend.
+
+**Status:** Background risk, low urgency now, high urgency if R1 and R5 are resolved positively.
+
+---
+
+## R7 — Part-time execution risk
+
+**What it is**
+
+All of the above has to be resolved with 15h/week per person, alongside full-time jobs. This is not a risk specific to PDE, but it compounds every other risk on this list — less time means slower learning cycles on R1, R4, and R5, and more temptation toward R2 (documentation instead of testing).
+
+**Why it matters**
+
+Every week spent without new evidence (usage data or user conversations) is a week where the biggest risks on this list remain exactly as uncertain as they are today.
+
+**How we would detect it**
+
+Track weeks-since-last-new-evidence as a simple internal metric. If this number keeps growing, something on this list is being avoided.
+
+**What would reduce it**
+
+A hard rule: each 2-week cycle must produce at least one piece of new evidence (a user conversation, a usage metric, a test result) — not just a new document.
+
+**Status:** Ongoing, structural, will not go away.
+
+---
+
+## How to use this document
+
+Before writing PRODUCT.md or MVP.md in detail, re-read R1 and R2. They are the two risks most likely to quietly redirect effort away from what actually needs validating first: whether a single mini app, evaluated purely as a product, can win real and repeated usage.
