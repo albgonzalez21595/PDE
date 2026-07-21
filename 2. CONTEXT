@@ -21,9 +21,9 @@ Personal Decision Engine (PDE)
 
 Discovery
 
-**Current Objective**
+Current Objective
 
-Understand the real user problem before writing significant amounts of code.
+Validate whether reducing the cost of personal decision making is a problem large enough to build a company around.
 
 ---
 
@@ -113,6 +113,8 @@ Current hypotheses that appear strong:
 
 These are currently the biggest risks.
 
+1. Can a company built around reducing the cognitive cost of decision making generate enough daily value for users to build long-term retention?
+
 ## Product
 
 Why would someone use PDE every week?
@@ -155,6 +157,8 @@ When should Premium exist?
 - The company is now defined as a Personal Decision Engine.
 - Mini apps are considered information sources, not products.
 - The user model is considered the long-term competitive advantage.
+- The primary user problem is no longer considered to be recommendations, but the effort required to evaluate an increasing number of options.
+- Product discovery will focus on user behaviour before technology.
 
 ---
 
