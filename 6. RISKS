@@ -2,11 +2,77 @@
 
 > This document should always answer: what could invalidate PDE, and how would we know early?
 
-Each risk includes: what it is, why it matters, how we would detect it, and what would reduce it. Risks are ordered by how likely they are to kill the project, not by how interesting they are to discuss.
+Each risk includes: what it is, why it matters, how we would detect it, and what would reduce it. Risks are ordered by how likely they are to kill the project, not by how interesting they are to discuss. This ordering was revised on 2026-07-21 after review — see changelog at the end.
 
 ---
 
-## R1 — The sensor/product paradox
+## R0 — The Value Perception Gap
+
+**What it is**
+
+Users may agree that decision making is frustrating while still not feeling enough pain to adopt a new product or change their habits.
+
+**Why it matters**
+
+A problem can be real without being commercially important. If people are comfortable living with the problem, they won't actively look for a solution. This sits above every other risk on this list: it questions whether the problem is worth solving at all, before asking whether we're solving it the right way.
+
+**How we would detect it**
+
+User interviews reveal frustration but very low willingness to install, return to, or recommend a product solving it.
+
+**What would reduce it**
+
+Identify a specific user segment where the problem is significantly more painful than average, rather than assuming the average person's frustration is enough.
+
+**Status:** Untested. The first thing to validate, before anything else on this list.
+
+---
+
+## R1 — Wrong frequency
+
+**What it is**
+
+We don't yet know how often the underlying problem occurs for a given user: daily, weekly, monthly, or more rarely.
+
+**Why it matters**
+
+Frequency determines what kind of company this can be. A painful-but-monthly problem (e.g., tax filing) can support a real business, but a fundamentally different one — high price, seasonal, no need for daily habit — than a business that depends on daily or weekly engagement to build a useful interest graph. If the real frequency of "needing to decide" in any single domain is low, the sensor model (see R3) never accumulates enough signal, regardless of how well the mini app is built.
+
+**How we would detect it**
+
+Ask directly in user interviews, and — once any mini app exists — measure actual time-between-uses against what the business model assumes.
+
+**What would reduce it**
+
+Decide explicitly, before building, which frequency band we are targeting, and choose a domain where that frequency is known to be realistic rather than assumed.
+
+**Status:** Unresolved. Directly determines what "success" should even look like.
+
+---
+
+## R2 — Recommendation vs. Decision vs. Tool
+
+**What it is**
+
+We don't yet know whether the user wants a recommendation, a decision made for them, or a tool that helps them decide. These are three different products, with different trust requirements, different UX, and different liability if wrong.
+
+**Why it matters**
+
+Building the wrong one of these three means building something structurally mismatched to what people actually want, no matter how good the execution. It also changes the GDPR profiling exposure (R8): a system that hands over a decision sits closer to Article 22 territory than a system that supports one.
+
+**How we would detect it**
+
+This is directly answerable through user interviews now, without building anything — ask people how they want help with a specific decision and listen for which of the three they describe.
+
+**What would reduce it**
+
+Resolve this explicitly before writing PRODUCT.md or MVP.md in detail.
+
+**Status:** Answerable immediately, no product required. Should be resolved first among the "what are we even building" questions.
+
+---
+
+## R3 — The sensor/product paradox
 
 **What it is**
 
@@ -24,11 +90,11 @@ Weekly retention of the first mini app is at or below what any generic, non-pers
 
 Build and evaluate the first mini app exactly as if PDE and the Interest Graph did not exist — as a standalone product that has to win purely on its own value. Only instrument it for cross-domain signal once it has retention on its own merits.
 
-**Status:** Unresolved. This is the single most important open risk in the project.
+**Status:** Unresolved. Depends on R0, R1 and R2 being answered first — this risk is about execution of a product whose right shape and frequency we haven't confirmed yet.
 
 ---
 
-## R2 — Scope expansion disguised as strategic clarity
+## R4 — Scope expansion disguised as strategic clarity
 
 **What it is**
 
@@ -36,7 +102,7 @@ The repository structure (VISION, INTEREST_GRAPH, TECHNICAL_ARCHITECTURE, DATABA
 
 **Why it matters**
 
-Writing strategy is lower-risk and more comfortable than talking to users, because it can't "fail" the way a real conversation can. It is easy to spend most of our available hours refining documents instead of testing the core hypothesis with real people.
+Writing strategy is lower-risk and more comfortable than talking to users, because it can't "fail" the way a real conversation can. It is easy to spend most of our available hours refining documents instead of testing the core hypotheses (R0, R1, R2) with real people.
 
 **How we would detect it**
 
@@ -44,35 +110,13 @@ Time spent per week on documentation/architecture exceeds time spent per week ta
 
 **What would reduce it**
 
-A simple time-allocation rule: no work on INTEREST_GRAPH.md, TECHNICAL_ARCHITECTURE.md, or AI.md until the user problem (cost of evaluating options) has been validated with real behavioral evidence, not just conversations.
+A simple time-allocation rule: no work on INTEREST_GRAPH.md, TECHNICAL_ARCHITECTURE.md, or AI.md until R0, R1 and R2 have real answers from real people, not just conversations among ourselves.
 
 **Status:** Live risk. Worth checking honestly every 2-3 weeks: where did the hours actually go?
 
 ---
 
-## R3 — Privacy and profiling exposure (GDPR)
-
-**What it is**
-
-The core asset — a unified behavioral model of a person across unrelated domains (what they watch, eat, buy, read) — is, under GDPR, profiling in one of its most sensitive forms. This is structurally different from a single-domain recommendation system.
-
-**Why it matters**
-
-Combining data across domains this different typically requires explicit, granular consent rather than legitimate interest. Article 22 GDPR gives users rights against decisions based solely on automated processing with significant effects — the more "decision-making" PDE presents itself as, the closer it sits to that threshold. Two people at 15h/week are not equipped to absorb a serious compliance failure.
-
-**How we would detect it**
-
-We can't wait to "detect" this reactively — it needs review before storing cross-domain personal data at any real scale, not after.
-
-**What would reduce it**
-
-Legal review (even a single paid consultation) before building any cross-domain data model. Design data collection to be domain-siloed and opt-in per domain from day one, rather than assuming a unified profile is the default.
-
-**Status:** Unresolved, not yet addressed anywhere in the repository.
-
----
-
-## R4 — Trust vs. surveillance perception
+## R5 — Trust vs. surveillance perception
 
 **What it is**
 
@@ -84,7 +128,7 @@ The more powerful and accurate the cross-domain model becomes, the more likely i
 
 **How we would detect it**
 
-User research (interviews, not just usage data) surfaces discomfort, hesitation to connect additional domains, or explicit "this is creepy" feedback when cross-domain use is introduced.
+User research surfaces discomfort, hesitation to connect additional domains, or explicit "this is creepy" feedback when cross-domain use is introduced.
 
 **What would reduce it**
 
@@ -94,11 +138,11 @@ Test the willingness to connect a second domain explicitly, as its own hypothesi
 
 ---
 
-## R5 — Weak or absent cross-domain signal
+## R6 — Weak or absent cross-domain signal
 
 **What it is**
 
-The thesis assumes that understanding someone's taste in one domain (e.g., movies) meaningfully improves recommendations in an unrelated domain (e.g., restaurants). This is an assumption, not a validated fact — the correlation between taste clusters across very different domains may be much weaker than it intuitively seems.
+The thesis assumes that understanding someone's taste in one domain (e.g., movies) meaningfully improves recommendations in an unrelated domain (e.g., restaurants). This is an assumption, not a validated fact.
 
 **Why it matters**
 
@@ -106,43 +150,65 @@ If cross-domain signal turns out to be weak, the entire premise of PDE over a si
 
 **How we would detect it**
 
-Once there are two mini apps with real usage data, measure whether adding data from domain B measurably improves recommendation quality/acceptance in domain A, compared to a single-domain baseline. If the lift is small or absent, the core cross-domain thesis is falsified.
+Once there are two mini apps with real usage data, measure whether adding data from domain B measurably improves recommendation quality/acceptance in domain A, compared to a single-domain baseline.
 
 **What would reduce it**
 
-This can only really be tested once two data-generating mini apps exist. Until then, treat cross-domain lift as an unproven hypothesis, not a given — do not architect for it prematurely (see R2).
+This can only really be tested once two data-generating mini apps exist. Until then, treat cross-domain lift as an unproven hypothesis — do not architect for it prematurely (see R4).
 
 **Status:** Cannot be tested yet. Flagged so it isn't forgotten or assumed true by default.
 
 ---
 
-## R6 — Structural competition from platforms that already have the data
+## R7 — Structural competition from platforms that already have the data
 
 **What it is**
 
-Google, Amazon, and Meta already hold cross-domain behavioral data about their own users (search, maps, shopping, social) and have not unified it into a "personal decision engine." This is evidence the problem is structurally hard — internal business silos, regulatory exposure, and public trust risk — not evidence that the opportunity is simply unclaimed.
+Google, Amazon, and Meta already hold cross-domain behavioral data about their own users and have not unified it into a "personal decision engine." This is evidence the problem is structurally hard — internal business silos, regulatory exposure, public trust risk — not evidence the opportunity is simply unclaimed.
 
 **Why it matters**
 
-If we succeed at building real cross-domain signal and it becomes commercially interesting, it becomes interesting to platforms with orders of magnitude more data and distribution than us. We should not assume "nobody has done this yet" implies "nobody could do this quickly if it worked."
+If we succeed at building real cross-domain signal and it becomes commercially interesting, it becomes interesting to platforms with orders of magnitude more data and distribution than us.
 
 **How we would detect it**
 
-Ongoing competitive monitoring once any traction appears — not a one-time check now.
+Ongoing competitive monitoring once any traction appears.
 
 **What would reduce it**
 
-Depth in a narrow, defensible niche (data or trust that big platforms have no incentive to replicate cheaply) rather than breadth across many domains, at least until there is real traction to defend.
+Depth in a narrow, defensible niche rather than breadth across many domains, at least until there is real traction to defend.
 
-**Status:** Background risk, low urgency now, high urgency if R1 and R5 are resolved positively.
+**Status:** Background risk, low urgency now, high urgency if R3 and R6 are resolved positively.
 
 ---
 
-## R7 — Part-time execution risk
+## R8 — Privacy and profiling exposure (GDPR)
 
 **What it is**
 
-All of the above has to be resolved with 15h/week per person, alongside full-time jobs. This is not a risk specific to PDE, but it compounds every other risk on this list — less time means slower learning cycles on R1, R4, and R5, and more temptation toward R2 (documentation instead of testing).
+The core long-term asset — a unified behavioral model of a person across unrelated domains — is, under GDPR, profiling in one of its most sensitive forms.
+
+**Why it matters — but why it's not top of the list**
+
+If nobody wants to use the product at all (R0), this risk never becomes relevant, and legal consultation is comparatively cheap once there's real traction to justify it. It does not need to be resolved before validating demand. But it is not purely a "later" concern either: it becomes an active gate at one specific, predictable moment — the point at which data from two domains is first merged for the same user, which is also the exact moment R6 gets tested.
+
+**How we would detect it**
+
+Not something to wait to "detect" reactively — it needs review at that specific gate, not after.
+
+**What would reduce it**
+
+A single rule tied to a trigger, not a calendar date: before merging any user's data across two domains for the first time (i.e., before testing R6), get at least a basic legal review and design that merge as opt-in per domain rather than a default unified profile.
+
+**Status:** Deprioritized for now by design, re-activates automatically at the R6 test.
+
+---
+
+## R9 — Part-time execution risk
+
+**What it is**
+
+All of the above has to be resolved with 15h/week per person, alongside full-time jobs. This is not a risk specific to PDE, but it compounds every other risk on this list.
 
 **Why it matters**
 
@@ -162,4 +228,10 @@ A hard rule: each 2-week cycle must produce at least one piece of new evidence (
 
 ## How to use this document
 
-Before writing PRODUCT.md or MVP.md in detail, re-read R1 and R2. They are the two risks most likely to quietly redirect effort away from what actually needs validating first: whether a single mini app, evaluated purely as a product, can win real and repeated usage.
+Before writing PRODUCT.md or MVP.md in detail, resolve R0, R1 and R2 with real user conversations — they determine whether there's a problem worth solving, what frequency it lives at, and what shape of product it needs. Only after that does R3 (the sensor/product paradox) become the right thing to focus execution on.
+
+---
+
+## Changelog
+
+**2026-07-21** — Added R0 (Value Perception Gap), R1 (Wrong frequency, was proposed as R8), R2 (Recommendation vs. Decision vs. Tool, was proposed as R9). Renumbered all risks by priority order rather than order of discovery. Moved GDPR risk (previously R3) down and reframed from "general concern" to "gate triggered by cross-domain data merge," per review discussion: it cannot kill the project before there is traction to protect, but it does need to be resolved at a specific, predictable point rather than left to "whenever we remember."
