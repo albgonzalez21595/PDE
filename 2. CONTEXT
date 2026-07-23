@@ -19,11 +19,13 @@ Personal Decision Engine (PDE)
 
 **Stage**
 
-Discovery
+Discovery / validation
 
-Current Objective
+**Current Objective**
 
-Validate whether reducing the cost of personal decision making is a problem large enough to build a company around.
+Validate whether reducing the cost of personal decision making is painful, frequent, and underserved enough to support a first product — and eventually a company.
+
+Right now that means choosing and testing a **forced wedge** (first user + first recurring decision + first domain), not building the long-term platform.
 
 ---
 
@@ -37,48 +39,66 @@ The objective is not to recommend the best movie.
 
 The objective is to recommend the best decision for a specific person.
 
-Everything we build should move us towards that goal.
+**PDE is the vision name, not the first product people install.**  
+The long-term value may be the technology and user understanding that reduce decision friction across life. The first thing users adopt will still look like a helper for one concrete recurring decision.
+
+Everything we build should move us towards the vision **through** a wedge we can falsify with real usage.
 
 ---
 
 # Core Thesis
 
-People's interests are fragmented.
+## The problem
 
-Netflix knows movies.
+People's options exploded. Access to information is largely solved. **Decision making is not.**
 
-Spotify knows music.
+People do not mainly suffer from a lack of recommendations. They suffer from the **cost of evaluating** options: time, uncertainty, negotiation with others, and low confidence in the final choice.
 
-Google Maps knows restaurants.
+Important qualification: a pain can be real and still not create a product habit. Many people already cope with defaults, partners, group chats, Maps, social feeds, or a general LLM. Ambient frustration is not the same as demand for a new product.
 
-Amazon knows purchases.
+## Why a company might exist
 
-Booking knows travel.
+People's interests and decision context are fragmented across apps:
 
-Each company understands only one part of the user.
+- Netflix knows movies
+- Spotify knows music
+- Google Maps knows restaurants
+- Amazon knows purchases
+- Booking knows travel
 
-We believe there is value in connecting all those interests into a single knowledge model.
+Each platform understands only one part of the person, and optimises its own ecosystem.
 
-That knowledge can then be used to make significantly better recommendations.
+We believe there is value in a layer that understands the person more deeply and uses that understanding to make decisions cheaper and more confident.
 
-Important qualification: cross-domain value is still unvalidated. It may come from taste transfer, decision-style transfer, social trust transfer, or none of them. The project should not assume horizontal expansion works until domain 1 has retention and transfer mechanisms can be tested with real usage.
+## What is still unvalidated
+
+Cross-domain value is unvalidated. If it exists, it may come from:
+
+- **taste transfer**
+- **decision-style transfer**
+- **social trust transfer**
+- **or none of them**
+
+The project should not assume horizontal expansion works until domain 1 has retention and transfer mechanisms can be tested with real usage.
+
+General LLMs are a primary competitive reference: they already offer broad decision help and can accumulate user context. PDE only wins if it is clearly better for a **specific job**, not for "decisions in general."
 
 ---
 
 # Technical Value
 
-The technical asset of the company is **not** an AI assistant.
+The technical asset of the company is **not** an AI chat assistant.
 
-It is a structured representation of the user.
+It is a **structured, continuously improving representation of the user** — preferences, constraints, decision style, and outcomes — that makes the next decision easier than the last.
 
 Conceptually:
 
 ```
-Mini Apps
+Mini Apps (sensors / interaction surfaces)
 
 ↓
 
-Interest Graph
+Interest Graph / user model
 
 ↓
 
@@ -95,7 +115,13 @@ User
 
 The AI is only the reasoning layer.
 
-The real asset is the knowledge underneath.
+The real asset is the knowledge underneath — but that asset only forms if:
+
+1. people return for a real decision job, and
+2. each session can improve the next (learning loop), and
+3. domain 1 works as a **standalone product** before it is treated as a sensor for a future graph.
+
+Until domain 1 has retention, architecture for multi-domain intelligence is premature.
 
 ---
 
@@ -103,59 +129,59 @@ The real asset is the knowledge underneath.
 
 Current hypotheses that appear strong:
 
-- The long-term value is the user model, not the mini apps.
-- Every new feature should improve the knowledge of the user.
-- AI should reason using structured knowledge instead of memorising information.
-- Better recommendations come from understanding people, not individual categories.
-- Community recommendations may become as important as AI recommendations.
-- The first mini app must win as a standalone product before it can be useful as a sensor.
-- Expansion should be organized by transfer mechanism, not by ambition to add more verticals.
+- The long-term value is the user model / decision system, not any single mini app vertical.
+- PDE is the vision; the first shippable thing must be a **forced wedge** (who, when, which decision, how often, success metric).
+- Mini apps are sensors for the long-term system, but the first mini app must **win as a product** before it can be useful as a sensor.
+- Every feature should increase the system's understanding of the user — or it is probably noise.
+- AI should reason over structured knowledge rather than only conversational memory.
+- People buy **confidence**, not recommendations. Trust beats raw accuracy.
+- Better decisions come from understanding people and their context, not from optimising a single category in isolation.
+- Community / social trust may matter as much as model-based personalization for some domains.
+- Expansion should be organized by **transfer mechanism**, not by ambition to add more verticals.
+- General LLMs, incumbents in the domain (e.g. Maps, streaming UIs), and social workarounds (partner, friends, TikTok) are the real alternatives to beat.
+- Monetization comes after product value is real; discovery can still succeed as learning. Domain choice should not ignore whether money is *possible* later without destroying trust.
+- Evidence from user behaviour outranks more strategy documents. At part-time capacity, the default failure mode is elegant docs without new evidence.
 
 ---
 
 # Open Questions
 
-These are currently the biggest risks.
+These are currently the biggest unknowns.
 
-1. Can a company built around reducing the cognitive cost of decision making generate enough daily value for users to build long-term retention?
+## Company
 
-## Product
+1. Can reducing the cognitive cost of decision making create enough recurring value for long-term retention — and eventually a business?
 
-Why would someone use PDE every week?
+## Product / wedge (resolve first)
 
-What is the smallest product capable of validating our thesis?
+- Who is the first user (specific segment, not "people who decide")?
+- What specific recurring decision is painful enough to create return usage?
+- What frequency band are we targeting, and is it real for that segment? (R1)
+- Do users want a shortlist/tool, a strong recommendation, or a decision made for them? (R2)
+- What is the smallest product that validates the thesis?
+- How do we create value in the first session in under a few minutes?
+- How does session 2 become better than session 1?
+- How do we minimise onboarding friction?
+- **Why would someone use this instead of a general LLM (with memory) for that decision?**
+- Why would they use it instead of their current workaround (partner, friends, Maps, social feeds, defaults)?
+- Where does the decision happen, and can we be present at that moment (distribution)?
 
-What is the first mini app?
+## Horizontal thesis (later)
 
-Who is the first user?
+- Which transfer mechanism, if any, actually works across domains?
+- Will users accept connecting a second domain, or will it feel like surveillance?
 
-What specific recurring decision is painful enough to create weekly retention?
+## Technology (after wedge clarity)
 
-How do we create value in less than five minutes?
+- How should the Interest Graph evolve?
+- When will a simple store stop being enough?
+- How much structured context does the AI actually need?
 
-How do we minimise onboarding friction?
+## Business (after retention signal)
 
-Which transfer mechanism, if any, actually works across domains?
-
----
-
-## Technology
-
-How should the Interest Graph evolve?
-
-When will PostgreSQL stop being enough?
-
-How much context does the AI actually need?
-
----
-
-## Business
-
-Can affiliate revenue finance the first years?
-
-What retention would make this a viable business?
-
-When should Premium exist?
+- Can affiliate or other revenue finance the first years without poisoning trust?
+- What retention would make this a viable business?
+- When should Premium exist?
 
 ---
 
@@ -163,22 +189,35 @@ When should Premium exist?
 
 ## Decisions
 
-- We abandoned the idea of defining the company as a "Super App".
-- The company is now defined as a Personal Decision Engine.
-- Mini apps are considered information sources, not products.
-- The user model is considered the long-term competitive advantage.
-- The primary user problem is no longer considered to be recommendations, but the effort required to evaluate an increasing number of options.
-- Product discovery will focus on user behaviour before technology.
-- Work will happen local-first before pushing coherent versions to GitHub.
-- Cross-domain expansion is captured as a hypothesis, not a roadmap.
+- We abandoned defining the company as a "Super App".
+- The company is defined as a Personal Decision Engine (vision), not a multi-vertical app portfolio.
+- Mini apps are information sources / sensors long-term; domain 1 must still stand alone.
+- The primary user problem is the cost of evaluating options, not a lack of recommendations.
+- Product discovery focuses on user behaviour before technology.
+- Work is local-first; GitHub gets coherent versions worth preserving.
+- Cross-domain expansion is a hypothesis, not a roadmap.
+- Domain comparison and interview process live in `notes/` until validated enough to promote.
+
+## Validation materials (scratch)
+
+- `notes/DOMAIN_SCORECARD.md` — criteria and initial scores for candidate first domains (cooking and restaurants lead pre-interview).
+- `notes/INTERVIEW_SCRIPT.md` — script to test R0/R1/R2 and alternatives (including LLMs) on real last-decision stories.
+
+Top pre-interview candidates: **weeknight cooking** and **restaurants / eat out**. Do not build both. Interviews choose.
 
 ---
 
 # Immediate Goal
 
-Define precisely the first user, the first painful recurring decision, and the first domain.
+Run discovery interviews on the top domain candidates and define a **forced wedge**:
 
-Until that problem is crystal clear, no major technical decisions or expansion decisions should be made.
+1. first user  
+2. first painful recurring decision  
+3. first domain  
+4. what “better” means in session 1  
+5. how we will know in 2–4 weeks if it is working  
+
+Until that is clear from evidence — not only from internal discussion — no major technical decisions, expansion decisions, or multi-domain architecture work should be made.
 
 ---
 
@@ -190,5 +229,6 @@ Every discussion should improve one of these:
 - the product
 - the technology
 - the business model
+- **the evidence** that any of the above is true
 
 If a conversation does not improve any of them, it probably does not belong in this repository.
