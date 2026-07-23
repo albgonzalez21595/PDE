@@ -61,6 +61,8 @@ We believe there is value in connecting all those interests into a single knowle
 
 That knowledge can then be used to make significantly better recommendations.
 
+Important qualification: cross-domain value is still unvalidated. It may come from taste transfer, decision-style transfer, social trust transfer, or none of them. The project should not assume horizontal expansion works until domain 1 has retention and transfer mechanisms can be tested with real usage.
+
 ---
 
 # Technical Value
@@ -106,6 +108,8 @@ Current hypotheses that appear strong:
 - AI should reason using structured knowledge instead of memorising information.
 - Better recommendations come from understanding people, not individual categories.
 - Community recommendations may become as important as AI recommendations.
+- The first mini app must win as a standalone product before it can be useful as a sensor.
+- Expansion should be organized by transfer mechanism, not by ambition to add more verticals.
 
 ---
 
@@ -123,9 +127,15 @@ What is the smallest product capable of validating our thesis?
 
 What is the first mini app?
 
+Who is the first user?
+
+What specific recurring decision is painful enough to create weekly retention?
+
 How do we create value in less than five minutes?
 
 How do we minimise onboarding friction?
+
+Which transfer mechanism, if any, actually works across domains?
 
 ---
 
@@ -159,14 +169,16 @@ When should Premium exist?
 - The user model is considered the long-term competitive advantage.
 - The primary user problem is no longer considered to be recommendations, but the effort required to evaluate an increasing number of options.
 - Product discovery will focus on user behaviour before technology.
+- Work will happen local-first before pushing coherent versions to GitHub.
+- Cross-domain expansion is captured as a hypothesis, not a roadmap.
 
 ---
 
 # Immediate Goal
 
-Define precisely the user problem.
+Define precisely the first user, the first painful recurring decision, and the first domain.
 
-Until that problem is crystal clear, no major technical decisions should be made.
+Until that problem is crystal clear, no major technical decisions or expansion decisions should be made.
 
 ---
 

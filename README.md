@@ -25,22 +25,19 @@ README.md
 CONTEXT.md
 
 docs/
-
-VISION.md
-WORKING_BACKWARDS.md
-PRODUCT.md
-MVP.md
-INTEREST_GRAPH.md
-PERSONAL_DECISION_ENGINE.md
-TECHNICAL_ARCHITECTURE.md
-DATABASE.md
-AI.md
-BUSINESS_MODEL.md
-ROADMAP.md
-USER_RESEARCH.md
-RISKS.md
-QUESTIONS.md
-DECISION_LOG.md
+  VISION.md
+  WORKING_BACKWARDS.md
+  PRODUCT.md
+  INTEREST_GRAPH.md
+  EXPANSION_HYPOTHESIS.md
+  ARCHITECTURE.md
+  MONETIZATION.md
+  ROADMAP.md
+  RISKS.md
+  QUESTIONS.md
+  DECISION_LOG.md
+  INSIGHTS.md
+  CHANGELOG.md
 
 notes/
 ```
@@ -54,6 +51,14 @@ If this is your first time reading this repository, begin with:
 > **CONTEXT.md**
 
 Everything else expands on that document.
+
+Useful next reads:
+
+- `docs/WORKING_BACKWARDS.md` — customer problem, press release, FAQ and validation framing.
+- `docs/RISKS.md` — what could invalidate PDE and how to detect it early.
+- `docs/DECISION_LOG.md` — important decisions and why they were made.
+- `docs/EXPANSION_HYPOTHESIS.md` — non-authorizing notes on how horizontal expansion might work later.
+- `notes/` — scratch thinking that is not yet durable project context.
 
 ---
 
@@ -75,6 +80,8 @@ Code is expected to change.
 
 The vision should evolve much more slowly.
 
+Exploratory work should happen locally first. GitHub should receive coherent versions worth preserving, not every intermediate draft.
+
 ---
 
 ## Current Stage
@@ -84,4 +91,3 @@ Discovery Phase
 The goal is **not** to build quickly.
 
 The goal is to discover whether we are building the right company.
-

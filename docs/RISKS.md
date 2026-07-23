@@ -160,6 +160,36 @@ This can only really be tested once two data-generating mini apps exist. Until t
 
 ---
 
+## R6b — Which transfer mechanism, if any, actually works
+
+**What it is**
+
+R6 assumes a specific mechanism for cross-domain value: taste transfer, such as liking spicy food predicting a certain travel style. This is the weakest and least evidenced of at least three possible mechanisms:
+
+- **Taste transfer:** preferences in domain A predict preferences in domain B. Likely strong within closely related domains, such as cooking → restaurants, and weak to nonexistent across distant ones, such as cooking → travel or cooking → entertainment.
+- **Decision-style transfer:** behavioral traits — novelty-seeking vs. repeats-the-safe-choice, fast vs. deliberate decisions, price sensitivity, trust in social proof vs. objective data — may generalize across domains even when taste does not. Unvalidated.
+- **Social trust transfer:** horizontal value does not require any predictive model at all if it comes from shared identity and social proof: the same friends, the same reputation, informing decisions across verticals. This is closer to how real super apps, such as WeChat and Gojek, actually unified verticals, and does not depend on an algorithm understanding the user at all.
+
+**Why it matters**
+
+If we only test and disprove R6 as taste transfer and conclude "cross-domain doesn't work," we may be closing the door on a horizontal product prematurely. The three mechanisms have very different implementation requirements and very different odds of working for distant domain pairs, such as cooking → entertainment/travel vs. cooking → restaurants/fitness.
+
+**How we would detect it**
+
+Test each mechanism separately once two domains with real usage exist:
+
+- **Taste transfer:** does domain-A preference data improve domain-B recommendation acceptance vs. a domain-B-only baseline?
+- **Decision-style transfer:** does a small set of behavioral traits inferred from domain A, such as speed of choice, novelty-seeking, and price sensitivity, improve domain-B recommendations independent of taste data?
+- **Social trust transfer:** does showing "your friends in this app liked X" improve adoption or engagement in domain B, independent of any personalization model?
+
+**What would reduce it**
+
+Don't assume the expansion path is uniform. Near domains, such as cooking → groceries → restaurants, can likely rely on taste transfer. Adjacent-but-different domains, such as restaurants → fitness/running, should be tested for decision-style transfer before assuming any link. Distant domains, such as entertainment and travel, should probably be approached through social trust transfer first, not through inferred taste or inferred style, since that mechanism requires the least unproven inference.
+
+**Status:** Unvalidated, and not even testable until R3 and R6 have a first real answer. Recorded now so the expansion roadmap is not designed around the wrong mechanism by default.
+
+---
+
 ## R7 — Structural competition from platforms that already have the data
 
 **What it is**
